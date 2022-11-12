@@ -214,6 +214,28 @@ Value stop(const Array& params, bool fHelp)
 }
 
 
+Value reverseString(const Array& params, bool fHelp)
+{
+    string output;
+    if (fHelp || params.size() > 1) 
+    {
+         throw runtime_error(
+            "reverseString\n"
+            "\nReverses the string from input");
+    }
+
+    string input;
+    if (params.size() > 0) 
+    {
+        input = params[0].get_str();
+        int len = input.length();
+        while (len--)
+        {
+            output += input[len];
+        }
+    }
+    return output;
+}
 
 //
 // Call Table
@@ -227,6 +249,7 @@ static const CRPCCommand vRPCCommands[] =
     { "getinfo",                &getinfo,                true,      false,      false }, /* uses wallet if enabled */
     { "help",                   &help,                   true,      true,       false },
     { "stop",                   &stop,                   true,      true,       false },
+    { "reverseString",          &reverseString,          true,      true,       false },
 
     /* P2P networking */
     { "getnetworkinfo",         &getnetworkinfo,         true,      false,      false },
